@@ -22,7 +22,25 @@ const LyricsForm = ({ setLyrics }) => {
     return (
 
         <div>
-            <label>HelloWorld</label>
+            <label>Style:</label>
+            <select value={style} onChange={(e) => setStyle(e, EventTarget.value)}>
+                <option>Classical Rock</option>
+                <option>Metal</option>
+                <option>Punk</option>
+                <option>Emotional</option>
+            </select>
+
+            <label>Mood:</label>
+            <select value={mood} onChange={(e) => setMood(e, EventTarget.value)}>
+                <option>Energetic</option>
+                <option>Dark</option>
+                <option>Emotional</option>
+            </select>
+
+            <label>Keywords:</label>
+            <input type="text" value={keywords} onChange={(e) => setKeywords(e.target.value)} placeholder="e.g. love, rebellion, thunder" />
+
+            <button onClick={generateLyrics}>Generate Lyrics</button>
         </div>
     )
 };
