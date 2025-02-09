@@ -13,7 +13,7 @@ function Header() {
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
-                        <Link to="/logout">Logout</Link>
+                        <Link to="/login">Logout</Link>
                     </li>
                 </ul>
             </nav>

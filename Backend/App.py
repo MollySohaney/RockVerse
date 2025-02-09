@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager
+from flask_session import Session
 import psycopg2
 import cohere
 from flask_cors import CORS
@@ -11,9 +12,10 @@ load_dotenv()
 
 App = Flask(__name__)
 CORS(App)
+App.config["SESSION_TYPE"] = "filesystem"
+App.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # Set a strong secret key
+Session(App)
 bcrypt = Bcrypt(App)
-App.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
-jwt = JWTManager(App)
 
 DB_URL = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(DB_URL)
@@ -39,8 +41,8 @@ def signup():
                        (username, email, password_hash))
         user_id = cursor.fetchone()[0]
         conn.commit()
-        access_token = create_access_token(identity=user_id)
-        return jsonify({"message": "Signup successful", "token": access_token})
+        session['user_id'] = user_id
+        return jsonify({"message": "Signup successful"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -56,11 +58,21 @@ def login():
     if not user or not bcrypt.check_password_hash(user[1], password):
         return jsonify({"error": "Invalid credentials"}), 401
     
-    access_token = create_access_token(identity=user[0])
-    return jsonify({"message": "Login successful", "token": access_token})
+    session['user_id'] = user[0]
+    return jsonify({"message": "Login successful"})
+
+@App.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)
+    return jsonify({"message": "Logged out successfully"})
+
+@App.route('/dashboard', methods=['GET'])
+def dashboard():
+    if 'user_id' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({"message": "Welcome to your dashboard!"})
 
 @App.route('/generate_lyrics', methods=['POST'])
-@jwt_required
 def gen_lyrics():
     try:
         data = request.get_json()
@@ -73,12 +85,12 @@ def gen_lyrics():
         prompt = f"Write a {style} song with a {mood} mood. Keywords are: {keywords}"
 
         response = co.generate(
-            model='command',  # You can use 'xlarge' for high-quality text generation
+            model='command',
             prompt=prompt,
-            max_tokens=150  # Adjust the token count as needed
+            max_tokens=150
         )
 
-        lyrics = response.generations[0].text.strip()
+        lyrics = response.generations[0].text
         return jsonify({"lyrics": lyrics})
     
     except Exception as e:
