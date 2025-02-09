@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import LyricsForm from "./LyricsForm";
-import LyricsDisplay from "./LyricsDisplay.js";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Signup from "./Signup";
+import Login from "./Login";
+import Dashboard from "./Dashboard"
 import "./App.css";
 
 function App() {
     const [lyrics, setLyrics] = useState("");
     return (
-        <div>
-            <h1> RockVerse </h1>
-            <LyricsForm setLyrics={setLyrics} />
-            <LyricsDisplay lyrics={lyrics} />
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </Router>
     );
 }
 
