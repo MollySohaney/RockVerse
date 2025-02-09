@@ -4,7 +4,7 @@ const LyricsDisplay = ({ lyrics }) => {
     return (
         <div>
             <h2>Generated Lyrics</h2>
-            <pre>lyrics...</pre>
+            <pre>{lyrics}</pre>
         </div>
     );
 };

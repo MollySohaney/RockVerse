@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import openai
+import cohere
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -9,7 +9,8 @@ load_dotenv()
 App = Flask(__name__)
 CORS(App)
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+co = cohere.Client(COHERE_API_KEY)
 
 
 @App.route('/generate_lyrics', methods=['POST'])
@@ -24,10 +25,10 @@ def gen_lyrics():
 
         prompt = f"Write a {style} song with a {mood} mood. Keywords are: {keywords}"
 
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=200
+        response = co.generate(
+            model='command',  # You can use 'xlarge' for high-quality text generation
+            prompt=prompt,
+            max_tokens=150  # Adjust the token count as needed
         )
 
         lyrics = response.generations[0].text

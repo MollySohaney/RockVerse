@@ -42,7 +42,6 @@ input, select {
 }
 
 pre {
-    
     display: block;
     background-color: #00000030;
     height: 585px;
@@ -51,6 +50,7 @@ pre {
     padding-top: 100px;
     text-align: center;
     border-radius: 10px;
+    white-space: initial;
 }
 
 .lyrics-form {
@@ -90,7 +90,7 @@ pre {
     display: block;
     margin-left: 12vw;
     margin-top: -62px;
-    font-size: 12px;
+    font-size: 15px;
 }
 .lyrics-form button {
     text-align: center;
