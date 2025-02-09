@@ -10,7 +10,9 @@ Features
 - Session-Based Authentication: Ensures that only logged-in users can access the dashboard.
 - Responsive Design: The app is fully responsive and user-friendly across devices.
 
+
 Technologies Used
+
 Frontend:
 - React.js
 - React Router
@@ -24,6 +26,7 @@ Backend:
 
 Database:
 - PostgreSQL (for user authentication)
+
 
 Challenges:
 - Session Management: Implementing session-based authentication in Flask was initially challenging because of session cookie handling. After reading the Flask documentation and experimenting with Flask-Session, I successfully managed session data on the server-side and stored user information in cookies.
