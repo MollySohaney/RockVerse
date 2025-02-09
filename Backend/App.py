@@ -11,6 +11,7 @@ load_dotenv()
 
 App = Flask(__name__)
 CORS(App)
+App.config["SESSION_TYPE"] = "filesystem"
 App.config["SECRET_KEY"] = os.getenv("SESSION_SECRET_KEY") 
 Session(App)
 bcrypt = Bcrypt(App)
