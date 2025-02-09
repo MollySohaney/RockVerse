@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 import openai
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 App = Flask(__name__)
 CORS(App)
 
-openai.api_key = "need to add api key"
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 @App.route('/generate_lyrics', methods=['POST'])
 def gen_lyrics():
@@ -20,7 +25,7 @@ def gen_lyrics():
         prompt = f"Write a {style} song with a {mood} mood. Keywords are: {keywords}"
 
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=200
         )

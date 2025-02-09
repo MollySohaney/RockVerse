@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LyricsForm from "./LyricsForm";
 import LyricsDisplay from "./LyricsDisplay.js";
+import "./App.css";
 
 function App() {
     const [lyrics, setLyrics] = useState("");

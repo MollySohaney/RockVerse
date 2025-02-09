@@ -21,7 +21,7 @@ const LyricsForm = ({ setLyrics }) => {
 
     return (
 
-        <div>
+        <div class="lyrics-form">
             <label>Style:</label>
             <select value={style} onChange={(e) => setStyle(e, EventTarget.value)}>
                 <option>Classical Rock</option>
