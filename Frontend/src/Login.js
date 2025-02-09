@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 import "./App.css";
 
 function Login() {
@@ -23,11 +24,14 @@ function Login() {
     };
 
     return (
-        <div class="login-form">
-            <h3>Login</h3>
-            <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={handleLogin}>Login</button>
+        <div>
+            <Header />
+            <div class="login-form">
+                <h3>Login</h3>
+                <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={handleLogin}>Login</button>
+            </div>
         </div>
     );
 }
