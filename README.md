@@ -8,7 +8,7 @@ Features
 - User Authentication: Users can sign up, log in, and access a personalized dashboard.
 - Lyric Generation: Generate rock lyrics by specifying style, mood, and keywords.
 - Session-Based Authentication: Ensures that only logged-in users can access the dashboard.
-- Responsive Design: The app is fully responsive and user-friendly across devices. < br / >
+- Responsive Design: The app is fully responsive and user-friendly across devices.
 
 
 Technologies Used
