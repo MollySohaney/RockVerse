@@ -1,3 +1,4 @@
 node_modules
 rock-verse-env
 .env
+flask_session

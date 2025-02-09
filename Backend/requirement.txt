@@ -1,0 +1,7 @@
+Flask
+Flask-Session
+Flask-Bcrypt
+psycopg2
+cohere
+python-dotenv
+Flask-Cors

@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import create_access_token, jwt_required, JWTManager
 from flask_session import Session
 import psycopg2
 import cohere
@@ -12,8 +11,7 @@ load_dotenv()
 
 App = Flask(__name__)
 CORS(App)
-App.config["SESSION_TYPE"] = "filesystem"
-App.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # Set a strong secret key
+App.config["SECRET_KEY"] = os.getenv("SESSION_SECRET_KEY") 
 Session(App)
 bcrypt = Bcrypt(App)
 

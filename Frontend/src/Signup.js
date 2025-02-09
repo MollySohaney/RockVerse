@@ -17,7 +17,6 @@ function Signup() {
                 password,
             });
 
-            localStorage.setItem("token", response.data.token);
             navigate("/dashboard");
         } catch (error) {
             console.error("Signup error:", error.response.data);
